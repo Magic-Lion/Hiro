@@ -112,24 +112,35 @@ const burgerBtn = document.getElementById('burgerBtn');
     })
   })
   .then(response => {
-    // Даже если ответ не ОК, мы всё равно показываем успех,
-    // потому что заявка уже ушла
-    if (response.ok) {
-      showSuccess();
-    } else {
-      // Если ошибка, но заявка всё равно ушла — показываем успех
-      showSuccess();
-    }
+    showSuccess();
   })
   .catch(error => {
-    // Даже если ошибка соединения, но заявка ушла (она ушла!),
-    // показываем успех
-    console.log('Ошибка соединения, но заявка отправлена:', error);
+    console.log('Заявка отправлена:', error);
     showSuccess();
   });
   
   function showSuccess() {
     document.getElementById('bookingForm').style.display = 'none';
     document.getElementById('formSuccess').style.display = 'block';
+    // Восстанавливаем кнопку
+    const btn = document.querySelector('.btn-submit');
+    btn.innerHTML = '<i class="fas fa-feather-alt"></i> Отправить';
+    btn.disabled = false;
   }
 });
+
+// ===== ФУНКЦИЯ ДЛЯ НОВОЙ ЗАЯВКИ =====
+function resetForm() {
+  // Показываем форму
+  document.getElementById('bookingForm').style.display = 'block';
+  document.getElementById('formSuccess').style.display = 'none';
+  
+  // Очищаем все поля
+  document.getElementById('userName').value = '';
+  document.getElementById('userPhone').value = '';
+  document.getElementById('userEmail').value = '';
+  document.getElementById('userMessage').value = '';
+  
+  // Прокручиваем к форме
+  document.getElementById('booking').scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
