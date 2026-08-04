@@ -1,3 +1,72 @@
+const burgerBtn = document.getElementById('burgerBtn');
+    const navMenu = document.getElementById('navMenu');
+    
+    burgerBtn.addEventListener('click', function() {
+      this.classList.toggle('active');
+      navMenu.classList.toggle('open');
+    });
+    
+    // Закрываем меню при клике на ссылку
+    document.querySelectorAll('.nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        burgerBtn.classList.remove('active');
+        navMenu.classList.remove('open');
+      });
+    });
+    
+    // ===== КНОПКА НАВЕРХ =====
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 500) {
+        scrollBtn.classList.add('visible');
+      } else {
+        scrollBtn.classList.remove('visible');
+      }
+    });
+    
+    scrollBtn.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // ===== ТАЙМЕР АКЦИИ (24 часа) =====
+    function startTimer() {
+      const now = new Date();
+      const end = new Date(now);
+      end.setHours(now.getHours() + 24);
+      
+      function updateTimer() {
+        const diff = end - new Date();
+        if (diff <= 0) {
+          document.getElementById('timer').textContent = 'Акция завершена';
+          return;
+        }
+        const hours = String(Math.floor(diff / 3600000)).padStart(2, '0');
+        const mins = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+        const secs = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+        document.getElementById('timer').textContent = `${hours}:${mins}:${secs}`;
+      }
+      
+      updateTimer();
+      setInterval(updateTimer, 1000);
+    }
+    startTimer();
+    
+    // ===== FAQ =====
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', function() {
+        const item = this.parentElement;
+        const isActive = item.classList.contains('active');
+        
+        // Закрываем все
+        document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
+        
+        // Открываем текущий, если он был закрыт
+        if (!isActive) {
+          item.classList.add('active');
+        }
+      });
+    });
 // Настройки Telegram бота (ЗАМЕНИТЕ НА СВОИ)
   const BOT_TOKEN = '8781406021:AAElraGYEGkGGaA866Ntd12m5rT0boj7h60'; // Вставьте ваш токен
   const CHAT_ID = '1707020523'; // Вставьте ваш Chat ID
