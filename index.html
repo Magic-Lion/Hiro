@@ -170,22 +170,28 @@
     </div>
 
     <!-- ФОРМА ЗАПИСИ -->
-    <div class="form-section" id="booking">
-      <h3><i class="fas fa-pen-fancy"></i> Оставьте заявку</h3>
-      <form id="bookingForm">
-        <div class="form-group">
-          <input type="text" placeholder="Ваше имя" required>
-          <input type="tel" placeholder="Телефон или Telegram" required>
-          <input type="email" placeholder="Email (необязательно)">
-          <textarea placeholder="Кратко опишите вопрос или выберите услугу..."></textarea>
-          <button type="submit" class="btn-submit"><i class="fas fa-feather-alt"></i> Отправить</button>
-        </div>
-        <p style="text-align: center; margin-top: 18px; color: #9b8b7a; font-size: 1.1rem;">
-          <i class="fas fa-star" style="color: #d4af37;"></i> 
-          Я свяжусь с вами в течение 3 часов
-        </p>
-      </form>
+<div class="form-section" id="booking">
+  <h3><i class="fas fa-pen-fancy"></i> Оставьте заявку</h3>
+  <form id="bookingForm">
+    <div class="form-group">
+      <input type="text" id="userName" placeholder="Ваше имя" required>
+      <input type="tel" id="userPhone" placeholder="Телефон или Telegram" required>
+      <input type="email" id="userEmail" placeholder="Email (необязательно)">
+      <textarea id="userMessage" placeholder="Кратко опишите вопрос или выберите услугу..."></textarea>
+      <button type="submit" class="btn-submit"><i class="fas fa-feather-alt"></i> Отправить</button>
     </div>
+    <p style="text-align: center; margin-top: 18px; color: #9b8b7a; font-size: 1.1rem;">
+      <i class="fas fa-star" style="color: #d4af37;"></i> 
+      Я свяжусь с вами в течение 3 часов
+    </p>
+  </form>
+  <!-- Сообщение об успешной отправке (скрыто) -->
+  <div id="successMessage" style="display: none; text-align: center; padding: 30px; background: rgba(212, 175, 55, 0.1); border: 1px solid #d4af37; border-radius: 30px; margin-top: 20px;">
+    <i class="fas fa-check-circle" style="font-size: 3rem; color: #d4af37;"></i>
+    <h3 style="color: #ede7d9; margin-top: 10px;">✅ Заявка отправлена!</h3>
+    <p style="color: #bcaf9e; font-size: 1.2rem;">Я свяжусь с вами в ближайшее время. ✨</p>
+  </div>
+</div>
 
     <!-- ФУТЕР -->
     <footer class="footer">
