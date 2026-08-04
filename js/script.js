@@ -71,7 +71,7 @@ const burgerBtn = document.getElementById('burgerBtn');
   const BOT_TOKEN = '8781406021:AAElraGYEGkGGaA866Ntd12m5rT0boj7h60'; // Вставьте ваш токен
   const CHAT_ID = '1707020523'; // Вставьте ваш Chat ID
 
-     document.getElementById('bookingForm').addEventListener('submit', function(e) {
+ document.getElementById('bookingForm').addEventListener('submit', function(e) {
   e.preventDefault();
   
   const name = document.getElementById('userName').value.trim();
@@ -93,9 +93,8 @@ const burgerBtn = document.getElementById('burgerBtn');
 
 🕐 Отправлено: ${new Date().toLocaleString('ru-RU')}`;
   
-  // Показываем, что заявка отправляется
+  // Показываем анимацию загрузки
   const submitBtn = document.querySelector('.btn-submit');
-  const originalText = submitBtn.innerHTML;
   submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
   submitBtn.disabled = true;
   
@@ -143,4 +142,4 @@ function resetForm() {
   
   // Прокручиваем к форме
   document.getElementById('booking').scrollIntoView({ behavior: 'smooth', block: 'start' });
-};
+}
