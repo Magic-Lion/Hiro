@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Таролог-хиромант · Мистический консультант</title>
+  <!-- Шрифт с мистическим настроением -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <!-- Font Awesome для иконок -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- ШАПКА -->
+    <header class="header">
+      <div class="logo">
+        ✦ ᚣᚱᛕᚣᚺᚣ
+        <span>таролог · хиромант · нумеролог</span>
+      </div>
+      <div class="nav">
+  <a href="#services">Услуги</a>
+  <a href="#catalog">Каталог</a>  <!-- ← новая ссылка -->
+  <a href="#contacts">Контакты</a>
+  <a href="#booking">Запись</a>
+</div>
+    </header>
+
+    <!-- ГЕРОЙ -->
+    <section class="hero">
+      <div class="hero-text">
+        <h1>
+          <i class="fas fa-moon"></i> 
+          Судьба <br>в линиях руки
+        </h1>
+        <p>
+          «Линии говорят громче слов. <br> 
+          Я помогу услышать ваш путь.»
+        </p>
+        <a href="#booking" class="btn-gold"><i class="fas fa-hand-sparkles"></i> Записаться</a>
+      </div>
+      <div class="hero-image">
+        <i class="fas fa-hand-sparkles"></i>
+        <i class="fas fa-star" style="font-size: 3rem; display: block; margin-top: 10px;"></i>
+      </div>
+    </section>
+
+    <!-- УСЛУГИ -->
+    <h2 class="section-title" id="services"><span>✦</span> Мои услуги <span>✦</span></h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <i class="fas fa-eye"></i>
+        <h3>Таро-консультация</h3>
+        <p>Работа, отношения, финансы и карьера. Диагностика негатива и ответы на волнующие вопросы</p>
+        <div class="price">от 1700 ₽</div>
+        <a href="#booking" class="btn-small">Выбрать</a>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-hand-paper"></i>
+        <h3>Хиромантия</h3>
+        <p>Анализ линий руки: Любовная сфера, работа, финансы и карьера.</p>
+        <div class="price">от 3000 ₽</div>
+        <a href="#booking" class="btn-small">Выбрать</a>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-compass"></i>
+        <h3>Полный разбор</h3>
+        <p>Таро + хиромантия. Детальное погружение в вашу судьбу.</p>
+        <div class="price">от 4500 ₽</div>
+        <a href="#booking" class="btn-small">Выбрать</a>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-gem"></i>
+        <h3>Совместимость</h3>
+        <p>Анализ партнёрства через Таро и линии рук обоих.</p>
+        <div class="price">от 3500 ₽</div>
+        <a href="#booking" class="btn-small">Выбрать</a>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-sign"></i>
+        <h3>Нумерология</h3>
+        <p>Нумерологический анализ по всем сферам жизни.</p>
+        <div class="price">от 3500 ₽</div>
+        <a href="#booking" class="btn-small">Выбрать</a>
+      </div>
+    </div>
+    <!-- ===== КАТАЛОГ ТОВАРОВ ===== -->
+<h2 class="section-title" id="catalog"><span>✦</span> Каталог товаров <span>✦</span></h2>
+<p style="text-align: center; font-size: 1.3rem; color: #bcaf9e; margin-bottom: 30px;">
+  Магические предметы для защиты, очищения и привлечения удачи
+</p>
+
+<div class="services-grid">
+  <!-- Наузы -->
+  <div class="service-card">
+    <i class="fas fa-circle"></i>
+    <h3>Наузы</h3>
+    <p>Узелковая магия для исполнения желаний, защиты и привлечения любви.</p>
+    <div class="price">от 500 ₽</div>
+    <a href="#booking" class="btn-small">Заказать</a>
+  </div>
+
+  <!-- Свечи -->
+  <div class="service-card">
+    <i class="fas fa-fire"></i>
+    <h3>Свечи</h3>
+    <p>Ритуальные свечи ручной работы: денежные, любовные, очищающие.</p>
+    <div class="price">от 300 ₽</div>
+    <a href="#booking" class="btn-small">Заказать</a>
+  </div>
+
+  <!-- Обереги -->
+  <div class="service-card">
+    <i class="fas fa-shield-alt"></i>
+    <h3>Обереги</h3>
+    <p>Славянские и рунические обереги для дома, семьи и личной защиты.</p>
+    <div class="price">от 800 ₽</div>
+    <a href="#booking" class="btn-small">Заказать</a>
+  </div>
+
+  <!-- Талисманы -->
+  <div class="service-card">
+    <i class="fas fa-gem"></i>
+    <h3>Талисманы</h3>
+    <p>Индивидуальные талисманы на удачу, деньги и успех в делах.</p>
+    <div class="price">от 1000 ₽</div>
+    <a href="#booking" class="btn-small">Заказать</a>
+  </div>
+</div>
+    <!-- БЛОК ОПЛАТЫ (заглушка) -->
+    <div class="payment-block">
+      <h2><i class="fas fa-lock"></i> Оплата</h2>
+      <div class="pay-note">
+        <i class="fas fa-credit-card"></i> После записи я пришлю ссылку на оплату
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <span style="background: #2a2120; padding: 8px 16px; border-radius: 40px; color: #d4af37; border: 1px solid #4a3f38;">
+          <i class="fab fa-cc-visa"></i> Visa
+        </span>
+        <span style="background: #2a2120; padding: 8px 16px; border-radius: 40px; color: #d4af37; border: 1px solid #4a3f38;">
+          <i class="fab fa-credit-card"></i> Sbercard
+        </span>
+        <span style="background: #2a2120; padding: 8px 16px; border-radius: 40px; color: #d4af37; border: 1px solid #4a3f38;">
+          <i class="fas fa-mobile-alt"></i> SBP
+        </span>
+      </div>
+    </div>
+
+    <!-- КОНТАКТЫ -->
+    <h2 class="section-title" id="contacts"><span>✧</span> Связь <span>✧</span></h2>
+    <div class="contacts-wrap">
+      <div class="contact-item">
+        <i class="fab fa-telegram"></i>
+        <a href="#">@Mariya171928</a>
+      </div>
+      <div class="contact-item">
+        <i class="fab fa-whatsapp"></i>
+        <a href="#">+7 (962) 411-42-68</a>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-envelope"></i>
+        <a href="#">maria_mel@inbox.ru</a>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-map-pin"></i>
+        <span>Онлайн / Анапа</span>
+      </div>
+    </div>
+
+    <!-- ФОРМА ЗАПИСИ -->
+<div class="form-section" id="booking">
+  <h3><i class="fas fa-pen-fancy"></i> Оставьте заявку</h3>
+  <form id="bookingForm">
+    <div class="form-group">
+      <input type="text" id="userName" placeholder="Ваше имя" required>
+      <input type="tel" id="userPhone" placeholder="Телефон или Telegram" required>
+      <input type="email" id="userEmail" placeholder="Email (необязательно)">
+      <textarea id="userMessage" placeholder="Кратко опишите вопрос или выберите услугу..."></textarea>
+      <button type="submit" class="btn-submit"><i class="fas fa-feather-alt"></i> Отправить</button>
+    </div>
+    <p style="text-align: center; margin-top: 18px; color: #9b8b7a; font-size: 1.1rem;">
+      <i class="fas fa-star" style="color: #d4af37;"></i> 
+      Я свяжусь с вами в течение 3 часов
+    </p>
+  </form>
+  <!-- Сообщение об успешной отправке (скрыто) -->
+  <div id="successMessage" style="display: none; text-align: center; padding: 30px; background: rgba(212, 175, 55, 0.1); border: 1px solid #d4af37; border-radius: 30px; margin-top: 20px;">
+    <i class="fas fa-check-circle" style="font-size: 3rem; color: #d4af37;"></i>
+    <h3 style="color: #ede7d9; margin-top: 10px;">✅ Заявка отправлена!</h3>
+    <p style="color: #bcaf9e; font-size: 1.2rem;">Я свяжусь с вами в ближайшее время. ✨</p>
+  </div>
+</div>
+
+    <!-- ФУТЕР -->
+    <footer class="footer">
+      <p>
+        <i class="fas fa-crown"></i> 
+        Аркана · таролог-хиромант-нумеролог 
+        <i class="fas fa-crown"></i>
+        <br>
+        <span style="font-size: 0.9rem; color: #5f554b;">© 2026 · Все права защищены. Конфиденциальность гарантирована.</span>
+      </p>
+    </footer>
+  </div>
+
+  <!-- Обработка формы (демо) -->
+  <script src="js/script.js"></script>
+</body>
+</html>
