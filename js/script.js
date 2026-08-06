@@ -143,3 +143,103 @@ function resetForm() {
   // Прокручиваем к форме
   document.getElementById('booking').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
+// ===== ЗВЁЗДЫ ДЛЯ ОЦЕНКИ =====
+const stars = document.querySelectorAll('#ratingStars i');
+const ratingInput = document.getElementById('reviewRating');
+
+stars.forEach(star => {
+  star.addEventListener('click', function() {
+    const value = parseInt(this.dataset.value);
+    ratingInput.value = value;
+    
+    // Подсвечиваем звёзды
+    stars.forEach((s, index) => {
+      if (index < value) {
+        s.style.color = '#d4af37';
+      } else {
+        s.style.color = '#555';
+      }
+    });
+  });
+  
+  // Ховер эффект
+  star.addEventListener('mouseenter', function() {
+    const value = parseInt(this.dataset.value);
+    stars.forEach((s, index) => {
+      if (index < value) {
+        s.style.color = '#d4af37';
+        s.style.opacity = '0.7';
+      } else {
+        s.style.color = '#555';
+      }
+    });
+  });
+  
+  star.addEventListener('mouseleave', function() {
+    const currentValue = parseInt(ratingInput.value);
+    stars.forEach((s, index) => {
+      if (index < currentValue) {
+        s.style.color = '#d4af37';
+        s.style.opacity = '1';
+      } else {
+        s.style.color = '#555';
+      }
+    });
+  });
+});
+
+// ===== ОТПРАВКА ОТЗЫВА В TELEGRAM =====
+document.getElementById('reviewFormSubmit').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const name = document.getElementById('reviewName').value.trim();
+  const city = document.getElementById('reviewCity').value.trim() || 'не указан';
+  const rating = parseInt(document.getElementById('reviewRating').value);
+  const text = document.getElementById('reviewText').value.trim();
+  
+  if (!name || !text) {
+    alert('Пожалуйста, заполните имя и текст отзыва.');
+    return;
+  }
+  
+  if (rating === 0) {
+    alert('Пожалуйста, поставьте оценку (выберите звёздочки).');
+    return;
+  }
+  
+  const starsText = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+  
+  const message = `⭐ *Новый отзыв!*
+  
+👤 *Имя:* ${name}
+📍 *Город:* ${city}
+⭐ *Оценка:* ${rating} / 5 (${starsText})
+📝 *Текст:* ${text}
+
+🕐 ${new Date().toLocaleString('ru-RU')}`;
+  
+  const submitBtn = document.querySelector('#reviewFormSubmit .btn-submit');
+  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
+  submitBtn.disabled = true;
+  
+  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      chat_id: CHAT_ID,
+      text: message,
+      parse_mode: 'Markdown'
+    })
+  })
+  .then(response => {
+    document.getElementById('reviewFormSubmit').style.display = 'none';
+    document.getElementById('reviewSuccess').style.display = 'block';
+  })
+  .catch(error => {
+    console.log('Отзыв отправлен:', error);
+    document.getElementById('reviewFormSubmit').style.display = 'none';
+    document.getElementById('reviewSuccess').style.display = 'block';
+  });
+});
