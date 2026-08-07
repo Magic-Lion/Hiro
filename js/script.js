@@ -67,80 +67,53 @@ const burgerBtn = document.getElementById('burgerBtn');
         }
       });
     });
-// Настройки Telegram бота (ЗАМЕНИТЕ НА СВОИ)
-  const BOT_TOKEN = '8781406021:AAElraGYEGkGGaA866Ntd12m5rT0boj7h60'; // Вставьте ваш токен
-  const CHAT_ID = '1707020523'; // Вставьте ваш Chat ID
 
- document.getElementById('bookingForm').addEventListener('submit', function(e) {
+  // ===== ФОРМА ЗАЯВКИ (через Formspree) =====
+document.getElementById('bookingForm').addEventListener('submit', function(e) {
   e.preventDefault();
   
-  const name = document.getElementById('userName').value.trim();
-  const phone = document.getElementById('userPhone').value.trim();
-  const email = document.getElementById('userEmail').value.trim() || 'не указан';
-  const message = document.getElementById('userMessage').value.trim() || 'не указано';
+  const form = this;
+  const submitBtn = form.querySelector('.btn-submit');
+  const originalText = submitBtn.innerHTML;
   
-  if (!name || !phone) {
-    alert('Пожалуйста, заполните имя и телефон.');
-    return;
-  }
-  
-  const text = `📩 *Новая заявка с сайта!*
-  
-👤 *Имя:* ${name}
-📞 *Телефон:* ${phone}
-✉️ *Email:* ${email}
-📝 *Вопрос:* ${message}
-
-🕐 Отправлено: ${new Date().toLocaleString('ru-RU')}`;
-  
-  // Показываем анимацию загрузки
-  const submitBtn = document.querySelector('.btn-submit');
+  // Показываем загрузку
   submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
   submitBtn.disabled = true;
   
-  // Отправляем в Telegram
-  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+  // Собираем данные
+  const formData = new FormData(form);
+  
+  fetch(form.action, {
     method: 'POST',
+    body: formData,
     headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      chat_id: CHAT_ID,
-      text: text,
-      parse_mode: 'Markdown'
-    })
+      'Accept': 'application/json'
+    }
   })
   .then(response => {
-    showSuccess();
+    if (response.ok) {
+      form.style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    } else {
+      alert('❌ Ошибка при отправке. Попробуйте ещё раз.');
+      submitBtn.innerHTML = originalText;
+      submitBtn.disabled = false;
+    }
   })
   .catch(error => {
-    console.log('Заявка отправлена:', error);
-    showSuccess();
+    console.error('Ошибка:', error);
+    alert('❌ Ошибка соединения. Проверьте интернет и попробуйте снова.');
+    submitBtn.innerHTML = originalText;
+    submitBtn.disabled = false;
   });
-  
-  function showSuccess() {
-    document.getElementById('bookingForm').style.display = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
-    // Восстанавливаем кнопку
-    const btn = document.querySelector('.btn-submit');
-    btn.innerHTML = '<i class="fas fa-feather-alt"></i> Отправить';
-    btn.disabled = false;
-  }
 });
 
-// ===== ФУНКЦИЯ ДЛЯ НОВОЙ ЗАЯВКИ =====
+// Сброс формы для новой заявки
 function resetForm() {
-  // Показываем форму
-  document.getElementById('bookingForm').style.display = 'block';
+  const form = document.getElementById('bookingForm');
+  form.style.display = 'block';
   document.getElementById('formSuccess').style.display = 'none';
-  
-  // Очищаем все поля
-  document.getElementById('userName').value = '';
-  document.getElementById('userPhone').value = '';
-  document.getElementById('userEmail').value = '';
-  document.getElementById('userMessage').value = '';
-  
-  // Прокручиваем к форме
+  form.reset();
   document.getElementById('booking').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 // ===== ЗВЁЗДЫ ДЛЯ ОЦЕНКИ =====
@@ -151,116 +124,75 @@ stars.forEach(star => {
   star.addEventListener('click', function() {
     const value = parseInt(this.dataset.value);
     ratingInput.value = value;
-    
-    // Подсвечиваем звёзды
     stars.forEach((s, index) => {
-      if (index < value) {
-        s.style.color = '#d4af37';
-      } else {
-        s.style.color = '#555';
-      }
+      s.style.color = index < value ? '#d4af37' : '#555';
     });
   });
-  
-  // Ховер эффект
   star.addEventListener('mouseenter', function() {
     const value = parseInt(this.dataset.value);
     stars.forEach((s, index) => {
-      if (index < value) {
-        s.style.color = '#d4af37';
-        s.style.opacity = '0.7';
-      } else {
-        s.style.color = '#555';
-      }
+      s.style.color = index < value ? '#d4af37' : '#555';
+      if (index < value) s.style.opacity = '0.7';
     });
   });
-  
   star.addEventListener('mouseleave', function() {
     const currentValue = parseInt(ratingInput.value);
     stars.forEach((s, index) => {
-      if (index < currentValue) {
-        s.style.color = '#d4af37';
-        s.style.opacity = '1';
-      } else {
-        s.style.color = '#555';
-      }
+      s.style.color = index < currentValue ? '#d4af37' : '#555';
+      s.style.opacity = '1';
     });
   });
 });
 
-// ===== ОТПРАВКА ОТЗЫВА В TELEGRAM (исправленная версия) =====
+// ===== ФОРМА ОТЗЫВА (через Formspree) =====
 document.getElementById('reviewFormSubmit').addEventListener('submit', function(e) {
   e.preventDefault();
   
-  const name = document.getElementById('reviewName').value.trim();
-  const city = document.getElementById('reviewCity').value.trim() || 'не указан';
-  const rating = parseInt(document.getElementById('reviewRating').value);
-  const text = document.getElementById('reviewText').value.trim();
+  const form = this;
+  const submitBtn = form.querySelector('.btn-submit');
+  const originalText = submitBtn.innerHTML;
   
-  if (!name || !text) {
-    alert('Пожалуйста, заполните имя и текст отзыва.');
-    return;
-  }
-  
-  if (rating === 0) {
+  if (parseInt(document.getElementById('reviewRating').value) === 0) {
     alert('Пожалуйста, поставьте оценку (выберите звёздочки).');
     return;
   }
   
-  const starsText = '★'.repeat(rating) + '☆'.repeat(5 - rating);
-  
-  const message = `⭐ *Новый отзыв!*
-  
-👤 *Имя:* ${name}
-📍 *Город:* ${city}
-⭐ *Оценка:* ${rating} / 5 (${starsText})
-📝 *Текст:* ${text}
-
-🕐 ${new Date().toLocaleString('ru-RU')}`;
-  
-  // Блокируем кнопку и показываем загрузку
-  const submitBtn = document.querySelector('#reviewFormSubmit .btn-submit');
-  const originalText = submitBtn.innerHTML;
   submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
   submitBtn.disabled = true;
   
-  // --- ИСПРАВЛЕННАЯ ЧАСТЬ (используем альтернативный URL) ---
+  const formData = new FormData(form);
   
-  // Вариант 1: Используем альтернативный домен для Telegram API
-  const telegramUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-  // Вариант 2: Если не работает, попробуйте раскомментировать эту строку
-  // const telegramUrl = `https://telegram.dog/bot${BOT_TOKEN}/sendMessage`;
-  
-  fetch(telegramUrl, {
+  fetch(form.action, {
     method: 'POST',
+    body: formData,
     headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      chat_id: CHAT_ID,
-      text: message,
-      parse_mode: 'Markdown'
-    })
+      'Accept': 'application/json'
+    }
   })
   .then(response => {
-    // Если ответ получен, показываем успех
-    console.log('Отзыв отправлен, статус:', response.status);
-    showReviewSuccess();
+    if (response.ok) {
+      form.style.display = 'none';
+      document.getElementById('reviewSuccess').style.display = 'block';
+    } else {
+      alert('❌ Ошибка при отправке. Попробуйте ещё раз.');
+      submitBtn.innerHTML = originalText;
+      submitBtn.disabled = false;
+    }
   })
   .catch(error => {
-    // Даже если ошибка, показываем успех (отзыв мог уйти)
-    console.log('Ошибка при отправке, но отзыв сохранён:', error);
-    showReviewSuccess();
+    console.error('Ошибка:', error);
+    alert('❌ Ошибка соединения. Проверьте интернет и попробуйте снова.');
+    submitBtn.innerHTML = originalText;
+    submitBtn.disabled = false;
   });
-  
-  function showReviewSuccess() {
-    document.getElementById('reviewFormSubmit').style.display = 'none';
-    document.getElementById('reviewSuccess').style.display = 'block';
-    // Восстанавливаем кнопку
-    const btn = document.querySelector('#reviewFormSubmit .btn-submit');
-    if (btn) {
-      btn.innerHTML = '<i class="fas fa-pen"></i> Отправить отзыв';
-      btn.disabled = false;
-    }
-  }
 });
+
+function resetReviewForm() {
+  const form = document.getElementById('reviewFormSubmit');
+  form.style.display = 'block';
+  document.getElementById('reviewSuccess').style.display = 'none';
+  form.reset();
+  document.getElementById('reviewRating').value = '0';
+  document.querySelectorAll('#ratingStars i').forEach(s => s.style.color = '#555');
+  document.getElementById('reviewForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
