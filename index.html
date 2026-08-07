@@ -205,17 +205,17 @@
         <div class="author">— Екатерина, Новосибирск</div>
       </div>
     </div>
-   <!-- ===== ФОРМА ОТЗЫВА (через Formspree) ===== -->
+<!-- ===== ФОРМА ОТЗЫВА (работает без JS) ===== -->
 <div class="form-section" id="reviewForm" style="margin-top: 30px;">
   <h3><i class="fas fa-star" style="color: #d4af37;"></i> Оставить отзыв</h3>
   <p style="text-align: center; color: #bcaf9e; font-size: 1.2rem; margin-bottom: 20px;">
     Поделитесь впечатлениями о моей работе ✨
   </p>
   
-  <form id="reviewFormSubmit" action="https://formspree.io/f/mqpzalrg" method="POST">
+  <form id="reviewFormSubmit" action="https://formspree.io/f/ДРУГОЙ_КОД" method="POST">
     <div class="form-group">
-      <input type="text" id="reviewName" name="Имя" placeholder="Ваше имя" required>
-      <input type="text" id="reviewCity" name="Город" placeholder="Город (необязательно)">
+      <input type="text" name="Имя" placeholder="Ваше имя" required>
+      <input type="text" name="Город" placeholder="Город (необязательно)">
       <div style="flex: 1 1 100%; text-align: center; margin: 10px 0;">
         <span style="color: #bcaf9e; font-size: 1.1rem;">Оценка: </span>
         <span class="rating-stars" id="ratingStars">
@@ -225,23 +225,15 @@
           <i class="fas fa-star" data-value="4" style="cursor: pointer; color: #555; font-size: 1.8rem; transition: 0.3s;"></i>
           <i class="fas fa-star" data-value="5" style="cursor: pointer; color: #555; font-size: 1.8rem; transition: 0.3s;"></i>
         </span>
-        <input type="hidden" id="reviewRating" name="Оценка" value="0">
+        <input type="hidden" name="Оценка" id="reviewRating" value="0">
       </div>
-      <textarea id="reviewText" name="Отзыв" placeholder="Расскажите о своём опыте..." required style="min-height: 80px;"></textarea>
+      <textarea name="Отзыв" placeholder="Расскажите о своём опыте..." required style="min-height: 80px;"></textarea>
       <input type="hidden" name="_subject" value="Новый отзыв с сайта!">
       <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://magic-lion.github.io/Hiro/#reviewForm">
       <button type="submit" class="btn-submit"><i class="fas fa-pen"></i> Отправить отзыв</button>
     </div>
   </form>
-  
-  <div class="form-success" id="reviewSuccess" style="display: none;">
-    <i class="fas fa-check-circle"></i>
-    <h3>✅ Спасибо за отзыв!</h3>
-    <p>Я очень ценю ваше мнение. ✨</p>
-    <button onclick="resetReviewForm()" class="btn-gold" style="margin-top: 20px; padding: 12px 40px; font-size: 1.1rem;">
-      <i class="fas fa-plus"></i> Оставить ещё
-    </button>
-  </div>
 </div>
 <!-- ===== ДОБАВЛЕНИЕ ОТЗЫВА (ДЛЯ АДМИНА) =====
 <div id="adminReviewPanel" style="display: none; margin: 20px 0; padding: 20px; background: rgba(30,25,27,0.5); border: 1px solid #d4af37; border-radius: 20px;">
@@ -354,17 +346,19 @@
       </div>
     </div>
     
-    <!-- ===== ФОРМА ЗАПИСИ (с Formspree) ===== -->
+
+<!-- ===== ФОРМА ЗАПИСИ (работает без JS) ===== -->
 <div class="form-section" id="booking">
   <h3><i class="fas fa-pen-fancy"></i> Оставьте заявку</h3>
-  <form id="bookingForm" action="https://formspree.io/f/xljrdlya" method="POST">
+  <form id="bookingForm" action="https://formspree.io/f/ВАШ_КОД" method="POST">
     <div class="form-group">
-      <input type="text" id="userName" name="Имя" placeholder="Ваше имя" required>
-      <input type="tel" id="userPhone" name="Телефон" placeholder="Телефон или Telegram" required>
-      <input type="email" id="userEmail" name="Email" placeholder="Email (необязательно)">
-      <textarea id="userMessage" name="Сообщение" placeholder="Кратко опишите вопрос или выберите услугу..."></textarea>
+      <input type="text" name="Имя" placeholder="Ваше имя" required>
+      <input type="tel" name="Телефон" placeholder="Телефон или Telegram" required>
+      <input type="email" name="Email" placeholder="Email (необязательно)">
+      <textarea name="Сообщение" placeholder="Кратко опишите вопрос или выберите услугу..." style="min-height: 90px;"></textarea>
       <input type="hidden" name="_subject" value="Новая заявка с сайта!">
       <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://magic-lion.github.io/Hiro/#booking">
       <button type="submit" class="btn-submit"><i class="fas fa-feather-alt"></i> Отправить</button>
     </div>
     <p style="text-align: center; margin-top: 18px; color: #9b8b7a; font-size: 1.1rem;">
@@ -372,14 +366,6 @@
       Я свяжусь с вами в течение 3 часов
     </p>
   </form>
-  <div class="form-success" id="formSuccess" style="display: none;">
-    <i class="fas fa-check-circle"></i>
-    <h3>✅ Заявка отправлена!</h3>
-    <p>Я свяжусь с вами в ближайшее время. ✨</p>
-    <button onclick="resetForm()" class="btn-gold" style="margin-top: 20px; padding: 12px 40px; font-size: 1.1rem;">
-      <i class="fas fa-plus"></i> Отправить ещё
-    </button>
-  </div>
 </div>
     
     <!-- ===== ФУТЕР ===== -->
